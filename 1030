@@ -1,0 +1,67 @@
+//nao esta completo
+
+import java.io.IOException;
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Main {
+ 
+    public static void main(String[] args) throws IOException {
+        Scanner input = new Scanner(System.in);
+        
+        int cases = input.nextInt();
+        
+        int total = 0;
+        int v1, v2;
+        
+        for(int i = 0; i < cases; i++) {
+            v1 = input.nextInt();
+            v2 = input.nextInt();
+            
+            int[] soldiers = new int[v1];
+            for(int j = 0; j < v1; j++) {
+                soldiers[j] = j;
+            }
+            
+            boolean execute = true;
+            int pos = -1;
+            int soldierAlive = 0;
+            
+            while(execute) {
+                int count = 0;
+                for(int l = 0; l < soldiers.length; l++) {
+                    if (soldiers[l] != -1) count++;
+                }
+                
+                if (count == 1) {
+                    execute = false;
+                    
+                    for(var k = 0; k < soldiers.length; k++) {
+                        if(soldiers[k] != -1) {
+                            soldierAlive = soldiers[k];
+                            break;
+                        }
+                    }
+                    
+                    break;
+                }
+                
+                pos += v2;
+                if (pos >= soldiers.length) {
+                    pos = pos - soldiers.length;
+                }
+                while(soldiers[pos] == -1) {
+                    pos++;
+                    if (pos >= soldiers.length) {
+                        pos = pos - soldiers.length;
+                    }
+                }
+                soldiers[pos] = -1;
+            }
+            
+            System.out.println("Case " + (i+1) + ": " + soldierAlive);
+        }
+ 
+    }
+ 
+}
